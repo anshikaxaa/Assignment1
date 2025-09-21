@@ -37,6 +37,5 @@ if __name__ == '__main__':
     app.run(
         host='0.0.0.0',
         port=port,
-        debug=False,  # Disable debug mode for production
-        allow_unsafe_werkzeug=True  # Allow Werkzeug in production
+        debug=False  # Disable debug mode for production
     )
