@@ -1,4 +1,15 @@
-psutil>=5.9.0
-flask>=2.0.0
-flask-socketio>=5.0.0
-python-socketio>=5.0.0
+# Core dependencies
+Flask==2.3.3
+Werkzeug==2.3.7
+
+# System monitoring
+psutil==5.9.5
+
+# Additional utilities
+requests==2.31.0
+python-dateutil==2.8.2
+
+# Development dependencies (optional)
+pytest==7.4.0
+black==23.7.0
+flake8==6.0.0

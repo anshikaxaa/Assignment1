@@ -29,8 +29,8 @@ def main():
 
     if interface_type == 'web':
         # Web interface (default for deployment)
-        from terminal.web_interface import WebTerminalInterface
-        interface = WebTerminalInterface(terminal_core, system_monitor, ai_processor)
+        from terminal.simple_web_interface import SimpleWebTerminalInterface
+        interface = SimpleWebTerminalInterface(terminal_core, system_monitor, ai_processor)
         interface.start()
     else:
         # CLI interface (for local development)

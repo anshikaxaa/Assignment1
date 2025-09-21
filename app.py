@@ -6,17 +6,25 @@ This file is used for deploying the Python Command Terminal to platforms like Re
 
 import os
 import sys
-from main import main
+from terminal.core import TerminalCore
+from terminal.system_monitor import SystemMonitor
+from terminal.ai_processor import AICommandProcessor
+from terminal.simple_web_interface import SimpleWebTerminalInterface
 
 def create_app():
     """Create and configure the Flask application."""
     # Set environment for web interface
     os.environ['TERMINAL_INTERFACE'] = 'web'
 
-    # Create Flask app
-    app = main()
+    # Initialize core components
+    terminal_core = TerminalCore()
+    system_monitor = SystemMonitor()
+    ai_processor = AICommandProcessor(terminal_core)
 
-    return app
+    # Create web interface
+    web_interface = SimpleWebTerminalInterface(terminal_core, system_monitor, ai_processor)
+
+    return web_interface.app
 
 # Create the Flask app instance
 app = create_app()
