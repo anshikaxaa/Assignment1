@@ -166,7 +166,12 @@ class SimpleWebTerminalInterface:
                         headers: {{ 'Content-Type': 'application/json' }},
                         body: JSON.stringify({{ command: command }})
                     }})
-                    .then(response => response.json())
+                    .then(response => {{
+                        if (!response.ok) {{
+                            throw new Error('HTTP error! status: ' + response.status);
+                        }}
+                        return response.json();
+                    }})
                     .then(data => {{
                         // Add output
                         if (data.output) {{
@@ -183,7 +188,8 @@ class SimpleWebTerminalInterface:
                         terminal.scrollTop = terminal.scrollHeight;
                     }})
                     .catch(error => {{
-                        terminal.innerHTML += '<div class="command-entry"><span class="error">Network error: ' + error + '</span></div>';
+                        console.error('Fetch error:', error);
+                        terminal.innerHTML += '<div class="command-entry"><span class="error">Network error: ' + escapeHtml(error.message || String(error)) + '</span></div>';
                     }});
 
                     input.value = '';
